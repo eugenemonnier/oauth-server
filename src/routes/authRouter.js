@@ -3,6 +3,7 @@ const authRouter = express.Router()
 
 const User = require('../models/users')
 const basicAuth = require('../middleware/basicAuth')
+const handleOauth = require('../middleware/handleOauth')
 
 authRouter.post('/signup', (req, res, next) => {
   const user = new User(req.body)
@@ -13,6 +14,10 @@ authRouter.post('/signup', (req, res, next) => {
 
 authRouter.post('/signin', basicAuth, (req, res, next) => {
   res.status(200).json({ token: req.token })
+})
+
+authRouter.get('/oauth', handleOauth, (req, res, next) => {
+  res.status(200).json({ message: 'signed in with oauth' })
 })
 
 authRouter.get('/users', async (req, res, next) => {

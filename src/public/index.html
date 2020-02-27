@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <a href="#" id="auth">click here to log in with google</a>
+  </body>
+
+  <script>
+    const link = document.getElementById('auth')
+    const baseURL = 'https://accounts.google.com/o/oauth2/v2/auth'
+    const options = {
+      client_id: '658078245679-9challjqn1drnapsmb4q2n27amg1u5sm.apps.googleusercontent.com',
+      redirect_uri: 'http://localhost:3000/oauth',
+      response_type: 'code',
+      scope: 'profile email openid'
+    }
+    const q = Object.keys(options).map(key => {
+      return `${key}=${encodeURIComponent(options[key])}`
+    }).join('&')
+    link.setAttribute('href', `${baseURL}?${q}`)
+  </script>
+</html>
